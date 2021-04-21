@@ -184,7 +184,7 @@ else:
         dbList = listDatabases()
 
         for db in dbList:
-            li = xbmcgui.ListItem( db, iconImage='DefaultFolder.png')
+            li = xbmcgui.ListItem( db )
             # li.setProperty('isFolder', 'true')
             # li.setProperty('isPlayable', 'true')
             filename = build_url({'dbName': db})

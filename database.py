@@ -99,8 +99,8 @@ def getDatabase():
     # Load database if it exists
     database = []
     if os.path.exists( databasePath ):
-        shortlistFile = open( databasePath, 'r')
-        database = pickle.load( shortlistFile, encoding="bytes" )
+        shortlistFile = open( databasePath, 'rb')
+        database = pickle.load( shortlistFile )
         shortlistFile.close()
 
     return database
@@ -113,8 +113,8 @@ def getDatabaseByName( dbName ):
     # xbmc.log( dbPath, xbmc.LOGNOTICE);
 
     if os.path.exists( dbPath ):
-        shortlistFile = open( dbPath, 'r')
-        database = pickle.load( shortlistFile, encoding="bytes" )
+        shortlistFile = open( dbPath, 'rb')
+        database = pickle.load( shortlistFile )
         shortlistFile.close()
 
     return database

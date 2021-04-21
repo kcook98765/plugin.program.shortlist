@@ -93,7 +93,7 @@ if action is not None:
 
         database = None
 
-        if nameNice is not None and nameNice is not "":
+        if nameNice is not None and nameNice != "":
             name = nameNice.lower( ) + ".db"
 
             # Build database

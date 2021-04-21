@@ -49,7 +49,7 @@ def main():
         item.filename = xbmc.getInfoLabel('ListItem.FilenameAndPath')
         # item.filename = sys.listitem.getfilename()
         item.title = sys.listitem.getLabel()
-        item.duration = sys.listitem.getduration()
+        item.duration = sys.listitem.getProperty('duration')
         item.rating = videoInfoTag.getRating()
         item.year = videoInfoTag.getYear()
         item.date = videoInfoTag.getPremiered()

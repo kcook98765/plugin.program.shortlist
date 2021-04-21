@@ -1,7 +1,7 @@
 import sys
 
-import urllib
-import urlparse
+import urllib.request, urllib.parse, urllib.error
+import urllib.parse
 import xbmcgui
 import xbmcplugin
 import xbmcaddon
@@ -17,7 +17,7 @@ __addondir__    = xbmc.translatePath( __addon__.getAddonInfo('profile') )
 __language__     = __addon__.getLocalizedString
 
 addon_handle = int(sys.argv[1])
-args = urlparse.parse_qs(sys.argv[2][1:])
+args = urllib.parse.parse_qs(sys.argv[2][1:])
 
 xbmcplugin.addSortMethod( addon_handle, xbmcplugin.SORT_METHOD_PLAYLIST_ORDER)
 xbmcplugin.addSortMethod( addon_handle, xbmcplugin.SORT_METHOD_TITLE)
@@ -30,7 +30,7 @@ dbName = args.get( 'dbName' )
 databaseName = args.get( 'databaseName' )
 
 def build_url(query):
-    return base_url + '?' + urllib.urlencode(query)
+    return base_url + '?' + urllib.parse.urlencode(query)
 
 if action is not None:
     # Process action
@@ -141,27 +141,27 @@ else:
             # Build the context menu items
             commands = []
 
-            params = urllib.urlencode( {'action': 'delete', 'dbName' : dbName[0], 'filename': filename } )
+            params = urllib.parse.urlencode( {'action': 'delete', 'dbName' : dbName[0], 'filename': filename } )
             script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Remove from Shortlist', script, ) )
             commands.append( ( __language__( 30001 ), script, ) )
 
-            params = urllib.urlencode( {'action': 'moveUp', 'dbName' : dbName[0], 'filename': filename} )
+            params = urllib.parse.urlencode( {'action': 'moveUp', 'dbName' : dbName[0], 'filename': filename} )
             script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move Up', script, ) )
             commands.append( ( __language__( 30002 ), script, ) )
 
-            params = urllib.urlencode( {'action': 'moveDn', 'dbName' : dbName[0], 'filename': filename } )
+            params = urllib.parse.urlencode( {'action': 'moveDn', 'dbName' : dbName[0], 'filename': filename } )
             script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move Down', script, ) )
             commands.append( ( __language__( 30003 ), script, ) )
 
-            params = urllib.urlencode( {'action': 'moveTop', 'dbName' : dbName[0], 'filename': filename } )
+            params = urllib.parse.urlencode( {'action': 'moveTop', 'dbName' : dbName[0], 'filename': filename } )
             script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move To Top', script, ) )
             commands.append( ( __language__( 30004 ), script, ) )
 
-            params = urllib.urlencode( {'action': 'moveBottom', 'dbName' : dbName[0], 'filename': filename } )
+            params = urllib.parse.urlencode( {'action': 'moveBottom', 'dbName' : dbName[0], 'filename': filename } )
             script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move To Bottom', script, ) )
             commands.append( ( __language__( 30005 ), script, ) )
@@ -193,12 +193,12 @@ else:
             # Build the context menu items
             commands = []
 
-            params = urllib.urlencode( {'action': 'deleteList', 'databaseName': db } )
+            params = urllib.parse.urlencode( {'action': 'deleteList', 'databaseName': db } )
             script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Delete Shortlist', script, ) )
             commands.append( ( __language__( 30007 ), script, ) )
 
-            params = urllib.urlencode( {'action': 'createList' } )
+            params = urllib.parse.urlencode( {'action': 'createList' } )
             script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Create Shortlist', script, ) )
             commands.append( ( __language__( 30008 ), script, ) )
@@ -209,5 +209,3 @@ else:
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=filename, listitem=li, isFolder=True)
 
         xbmcplugin.endOfDirectory(addon_handle)
-
-

@@ -100,7 +100,7 @@ def getDatabase():
     database = []
     if os.path.exists( databasePath ):
         shortlistFile = open( databasePath, 'r')
-        database = pickle.load( shortlistFile )
+        database = pickle.load( shortlistFile, encoding="bytes" )
         shortlistFile.close()
 
     return database
@@ -114,7 +114,7 @@ def getDatabaseByName( dbName ):
 
     if os.path.exists( dbPath ):
         shortlistFile = open( dbPath, 'r')
-        database = pickle.load( shortlistFile )
+        database = pickle.load( shortlistFile, encoding="bytes" )
         shortlistFile.close()
 
     return database

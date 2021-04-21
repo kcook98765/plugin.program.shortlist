@@ -122,7 +122,7 @@ else:
         count = 0
         for item in database:
             # Create a listitem with thumbnail and poster
-            li = xbmcgui.ListItem(item.title, iconImage='DefaultVideo.png')
+            li = xbmcgui.ListItem(item.title)
             li.setArt( { 'thumb' : item.thumb, 'poster' : item.poster, 'fanart' : item.fanart } )
 
             filename = item.filename

@@ -13,7 +13,7 @@ from database import *
 base_url = sys.argv[0]
 
 __addon__       = xbmcaddon.Addon(id='plugin.program.shortlist')
-__addondir__    = xbmc.translatePath( __addon__.getAddonInfo('profile') )
+__addondir__    = translatePath( __addon__.getAddonInfo('profile') )
 __language__     = __addon__.getLocalizedString
 
 addon_handle = int(sys.argv[1])
@@ -101,13 +101,13 @@ if action is not None:
             # No need to save it's it's done below
 
     else:
-        xbmc.log("SHORTLIST: Action Unknown: " + action)
+        log("SHORTLIST: Action Unknown: " + action)
 
     if database is not None:
         saveDatabaseByName( database, name )
 
     # Refresh the file list
-    xbmc.executebuiltin("Container.Refresh")
+    executebuiltin("Container.Refresh")
 else:
     # Show lists
     if dbName is not None:
@@ -142,27 +142,27 @@ else:
             commands = []
 
             params = urllib.parse.urlencode( {'action': 'delete', 'dbName' : dbName[0], 'filename': filename } )
-            script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Remove from Shortlist', script, ) )
             commands.append( ( __language__( 30001 ), script, ) )
 
             params = urllib.parse.urlencode( {'action': 'moveUp', 'dbName' : dbName[0], 'filename': filename} )
-            script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move Up', script, ) )
             commands.append( ( __language__( 30002 ), script, ) )
 
             params = urllib.parse.urlencode( {'action': 'moveDn', 'dbName' : dbName[0], 'filename': filename } )
-            script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move Down', script, ) )
             commands.append( ( __language__( 30003 ), script, ) )
 
             params = urllib.parse.urlencode( {'action': 'moveTop', 'dbName' : dbName[0], 'filename': filename } )
-            script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move To Top', script, ) )
             commands.append( ( __language__( 30004 ), script, ) )
 
             params = urllib.parse.urlencode( {'action': 'moveBottom', 'dbName' : dbName[0], 'filename': filename } )
-            script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Move To Bottom', script, ) )
             commands.append( ( __language__( 30005 ), script, ) )
 
@@ -194,18 +194,18 @@ else:
             commands = []
 
             params = urllib.parse.urlencode( {'action': 'deleteList', 'databaseName': db } )
-            script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Delete Shortlist', script, ) )
             commands.append( ( __language__( 30007 ), script, ) )
 
             params = urllib.parse.urlencode( {'action': 'createList' } )
-            script = 'XBMC.RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Create Shortlist', script, ) )
             commands.append( ( __language__( 30008 ), script, ) )
 
             li.addContextMenuItems( commands )
 
-            # xbmc.log( filename, xbmc.LOGNOTICE);
+            # log( filename, LOGNOTICE);
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=filename, listitem=li, isFolder=True)
 
         xbmcplugin.endOfDirectory(addon_handle)

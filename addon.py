@@ -107,7 +107,7 @@ if action is not None:
         saveDatabaseByName( database, name )
 
     # Refresh the file list
-    executebuiltin("Container.Refresh")
+    xbmc.executebuiltin("Container.Refresh")
 else:
     # Show lists
     if dbName is not None:

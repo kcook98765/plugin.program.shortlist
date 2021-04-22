@@ -13,7 +13,7 @@ from database import *
 base_url = sys.argv[0]
 
 __addon__       = xbmcaddon.Addon(id='plugin.program.shortlist')
-__addondir__    = translatePath( __addon__.getAddonInfo('profile') )
+__addondir__    = xbmcvfs.translatePath( __addon__.getAddonInfo('profile') )
 __language__     = __addon__.getLocalizedString
 
 addon_handle = int(sys.argv[1])

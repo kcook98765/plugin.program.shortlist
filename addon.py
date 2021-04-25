@@ -82,6 +82,8 @@ if action is not None:
             # ret = dialog.yesno('Kodi', 'Do you want to delete the "' + nameNice + '" shortlist?')
             ret = dialog.yesno('Kodi', __language__( 30009 ) + ' "' + nameNice + '" ' + __language__( 30010 ) )
 
+            del dialog
+            
             if ret == True:
                 os.remove( filename )
 
@@ -91,6 +93,7 @@ if action is not None:
         dialog = xbmcgui.Dialog()
         nameNice = dialog.input(__language__( 30011 ), type=xbmcgui.INPUT_ALPHANUM)
 
+        del dialog
         database = None
 
         if nameNice is not None and nameNice != "":
@@ -174,7 +177,10 @@ else:
             # Add listitem to directory
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=filename, listitem=li)
             count = count + 1
-        xbmcplugin.endOfDirectory(addon_handle)
+            
+            del li
+
+            xbmcplugin.endOfDirectory(addon_handle)
 
     else:
         # Show available lists
@@ -207,5 +213,7 @@ else:
 
             # log( filename, LOGNOTICE);
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=filename, listitem=li, isFolder=True)
+            
+            del li
 
         xbmcplugin.endOfDirectory(addon_handle)

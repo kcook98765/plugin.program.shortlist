@@ -107,7 +107,10 @@ if action is not None:
     # Refresh the file list
     xbmc.executebuiltin("Container.Refresh")
 
-    if dialog:
+    try: dialog
+    except NameError: dialog = None
+
+    if dialog is not None:
         del dialog
     
 else:
@@ -213,5 +216,8 @@ else:
             
         xbmcplugin.endOfDirectory(addon_handle)
 
-    if li:
+    try: li
+    except NameError: li = None
+
+    if li is not None:
         del li

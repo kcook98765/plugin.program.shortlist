@@ -216,8 +216,18 @@ else:
             
         xbmcplugin.endOfDirectory(addon_handle)
 
-    try: li
-    except NameError: li = None
+try:
+    dialog
+except NameError:
+    dialog = None
+    
+if dialog is not None:
+    del dialog
 
-    if li is not None:
-        del li
+try:
+    li
+except NameError:
+    li = None
+    
+if li is not None:
+    del li

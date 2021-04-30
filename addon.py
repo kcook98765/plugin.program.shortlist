@@ -85,13 +85,11 @@ if action is not None:
             if ret == True:
                 os.remove( filename )
 
-
     elif action[0] == 'createList':
         # Add a new list to the database
         dialog = xbmcgui.Dialog()
         nameNice = dialog.input(__language__( 30011 ), type=xbmcgui.INPUT_ALPHANUM)
 
-        del dialog
         database = None
 
         if nameNice is not None and nameNice != "":
@@ -100,7 +98,6 @@ if action is not None:
             # Build database
             database = []
             # No need to save it's it's done below
-
     else:
         log("SHORTLIST: Action Unknown: " + action)
 
@@ -109,6 +106,10 @@ if action is not None:
 
     # Refresh the file list
     xbmc.executebuiltin("Container.Refresh")
+
+    if dialog:
+        del dialog
+    
 else:
     # Show lists
     if dbName is not None:
@@ -176,8 +177,6 @@ else:
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=filename, listitem=li)
             count = count + 1
             
-            del li
-
             xbmcplugin.endOfDirectory(addon_handle)
 
     else:
@@ -212,9 +211,7 @@ else:
             # log( filename, LOGNOTICE);
             xbmcplugin.addDirectoryItem(handle=addon_handle, url=filename, listitem=li, isFolder=True)
             
-
-        if dialog
-            del dialog
-        if li
-            del li
         xbmcplugin.endOfDirectory(addon_handle)
+
+    if li:
+        del li

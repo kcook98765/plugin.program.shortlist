@@ -225,3 +225,6 @@ except NameError:
     
 if li is not None:
     del li
+
+del ShortlistItem
+del addItem, addItemToDatabase, itemExists, deleteItem, deleteItemFromDatabase, moveUp, moveDown, moveToTop, moveToBottom, getDatabase, getDatabaseByName, saveDatabase, saveDatabaseByName, listDatabases

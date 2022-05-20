@@ -1,12 +1,12 @@
 import sys
 import os
 import pickle
-import xbmc
+import xbmcvfs
 import xbmcaddon
 
 # Database location from plugin info
 __addon__       = xbmcaddon.Addon(id='plugin.program.shortlist')
-__addondir__    = xbmc.translatePath( __addon__.getAddonInfo('profile') )
+__addondir__    = xbmcvfs.translatePath( __addon__.getAddonInfo('profile') )
 
 # Settings to see which database
 __database__	= __addon__.getSetting('database').lower()

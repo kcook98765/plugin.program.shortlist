@@ -168,7 +168,7 @@ else:
             commands.append( ( __language__( 30005 ), script, ) )
 
             # commands.append( ( 'Show Info', 'Action(Info)', ) )
-            commands.append( ( __language__( 30006 ), script, ) )
+            commands.append( ( __language__( 30006 ), 'Action(Info)', ) )
 
             li.addContextMenuItems( commands )
 

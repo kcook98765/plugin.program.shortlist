@@ -101,6 +101,28 @@ if action is not None:
             database = []
             # No need to save it's it's done below
 
+    elif action[0] == 'renameList':
+        # Rename a list for the database
+        dialog = xbmcgui.Dialog()
+        nameNice = dialog.input(__language__( 30013 ), type=xbmcgui.INPUT_ALPHANUM)
+
+        database = None
+
+        if nameNice is not None and nameNice != "":
+            newname = nameNice.lower( ) + ".db"
+            newfilename = __addondir__ + newname
+            
+            nameNice = databaseName[0]
+            name = nameNice.lower() + ".db"
+            filename = __addondir__ + name
+            
+            
+            # name = newname
+            debug = "SHORTLIST: Action Rename: " + filename + " TO " + newfilename
+            xbmc.log(debug, level=xbmc.LOGINFO)
+
+            os.rename(filename, newfilename)
+
     else:
         log("SHORTLIST: Action Unknown: " + action)
 
@@ -203,6 +225,11 @@ else:
             script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
             # commands.append( ( 'Create Shortlist', script, ) )
             commands.append( ( __language__( 30008 ), script, ) )
+
+            params = urllib.parse.urlencode( {'action': 'renameList', 'databaseName': db } )
+            script = 'RunPlugin("plugin://plugin.program.shortlist/?%s")' % params
+            # commands.append( ( 'Rename Shortlist', script, ) )
+            commands.append( ( __language__( 30013 ), script, ) )
 
             li.addContextMenuItems( commands )
 

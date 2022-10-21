@@ -10,5 +10,10 @@ class ShortlistItem:
     thumb = ""   
     poster = ""
     fanart = ""
-    filename = "" 
+    filename = ""
+    banner = ""
+    clearart = ""
+    clearlogo = ""
+    landscape = ""
+    icon = "" 
     

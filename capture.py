@@ -58,6 +58,11 @@ def main():
         item.thumb = sys.listitem.getArt( 'thumb' )
         item.poster = sys.listitem.getArt( 'poster' )
         item.fanart = sys.listitem.getArt( 'fanart' )
+        item.banner = sys.listitem.getArt( 'banner' )
+        item.clearart = sys.listitem.getArt( 'clearart' )
+        item.clearlogo = sys.listitem.getArt( 'clearlogo' )
+        item.landscape = sys.listitem.getArt( 'landscape' )
+        item.icon = sys.listitem.getArt( 'icon' )
 
         result = addItemToDatabase( dbName, item )
 

@@ -144,9 +144,17 @@ else:
         # Add each item to the directory
         count = 0
         for item in database:
-            # Create a listitem with thumbnail and poster
+            # Create a listitem with art
             li = xbmcgui.ListItem(item.title)
-            li.setArt( { 'thumb' : item.thumb, 'poster' : item.poster, 'fanart' : item.fanart } )
+            li.setArt( { 'thumb' : item.thumb, 
+                'poster' : item.poster, 
+                'fanart' : item.fanart, 
+                'banner' : item.banner,
+                'clearart' : item.clearart,
+                'clearlogo' : item.clearlogo,
+                'landscape' : item.landscape,
+                'icon' : item.icon                
+                } )
 
             filename = item.filename
 
@@ -159,6 +167,7 @@ else:
             info['plotoutline'] = item.plotoutline
             info['title'] = item.title
             info['count'] = count
+
             li.setInfo( 'video', info )
 
             # Build the context menu items

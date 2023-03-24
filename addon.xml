@@ -1,5 +1,5 @@
 <?xml version="1.1" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.shortlist" name="Shortlist" version="0.0.10" provider-name="kcook98765">
+<addon id="plugin.program.shortlist" name="Shortlist" version="0.0.11" provider-name="kcook98765">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -28,7 +28,7 @@
       <menu id="kodi.core.main">
         <item library="capture.py">
             <label>30012</label>
-            <visible>[!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,movie)]</visible>
+            <visible>[!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,movie)] | String.IsEqual(Container.Content,files)</visible>
         </item>
       </menu>
     </extension>

@@ -68,6 +68,6 @@ msgctxt "#30013"
 msgid "Rename Shortlist"
 msgstr "Renommer la Shortlist"
 
-msgctxt "#30012"
+msgctxt "#30014"
 msgid "Add to Shortlist"
 msgstr "Ajouter à la Shortlist (Répertoire)"

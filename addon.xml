@@ -1,5 +1,5 @@
 <?xml version="1.1" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.shortlist" name="Shortlist" version="0.0.12" provider-name="kcook98765">
+<addon id="plugin.program.shortlist" name="Shortlist" version="0.0.12" provider-name="kcook98765,krruzic">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -35,5 +35,5 @@
             <visible>ListItem.IsFolder</visible>
         </item>
       </menu>
-    </extension>
+  </extension>
 </addon>

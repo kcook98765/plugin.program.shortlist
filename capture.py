@@ -64,6 +64,9 @@ def main():
         item.landscape = sys.listitem.getArt( 'landscape' )
         item.icon = sys.listitem.getArt( 'icon' )
 
+        if sys.argv[1] == "folder":
+            item.is_folder = True
+            
         result = addItemToDatabase( dbName, item )
 
         if result:

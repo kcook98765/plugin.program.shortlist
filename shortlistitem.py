@@ -16,4 +16,4 @@ class ShortlistItem:
     clearlogo = ""
     landscape = ""
     icon = "" 
-    
+    is_folder = False

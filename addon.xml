@@ -31,7 +31,7 @@
             <visible>!ListItem.IsFolder</visible>
         </item>
         <item library="capture.py" args="folder">
-            <label>30015</label>
+            <label>30014</label>
             <visible>ListItem.IsFolder</visible>
         </item>
       </menu>

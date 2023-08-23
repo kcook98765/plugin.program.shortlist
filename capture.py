@@ -66,7 +66,7 @@ def main():
 
         if sys.argv[1] == "folder":
             item.is_folder = True
-            
+
         result = addItemToDatabase( dbName, item )
 
         if result:

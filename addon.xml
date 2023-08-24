@@ -28,11 +28,11 @@
       <menu id="kodi.core.main">
         <item library="capture.py" args="file">
             <label>30012</label>
-            <visible>!ListItem.IsFolder</visible>
+            <visible>!ListItem.IsFolder + !String.IsEqual(Container.PluginName,plugin.program.shortlist)</visible>
         </item>
         <item library="capture.py" args="folder">
             <label>30014</label>
-            <visible>ListItem.IsFolder</visible>
+            <visible>ListItem.IsFolder + !String.IsEqual(Container.PluginName,plugin.program.shortlist)</visible>
         </item>
       </menu>
   </extension>

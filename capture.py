@@ -31,9 +31,7 @@ __addon__       = xbmcaddon.Addon(id='plugin.program.shortlist')
 
 # if __name__ == '__main__':
 def main():
-
     lst = listDatabases()
-    # xbmc.log( "; ".join(lst), xbmc.LOGNOTICE);
 
     dialog = xbmcgui.Dialog()
     ret = dialog.contextmenu(lst)
@@ -63,6 +61,9 @@ def main():
         item.clearlogo = sys.listitem.getArt( 'clearlogo' )
         item.landscape = sys.listitem.getArt( 'landscape' )
         item.icon = sys.listitem.getArt( 'icon' )
+
+        if sys.argv[1] == "folder":
+            item.is_folder = True
 
         result = addItemToDatabase( dbName, item )
 

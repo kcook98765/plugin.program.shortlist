@@ -1,10 +1,10 @@
 <?xml version="1.1" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.shortlist" name="Shortlist" version="0.0.11" provider-name="kcook98765">
+<addon id="plugin.program.shortlist" name="Shortlist" version="0.0.12" provider-name="Gothicawakening,kcook98765,krruzic">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="addon.py">
-    <provides>video</provides>
+    <provides>executable</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en_gb">Shortlist movies to watch</summary>
@@ -26,10 +26,14 @@
   </extension>
   <extension point="kodi.context.item">
       <menu id="kodi.core.main">
-        <item library="capture.py">
+        <item library="capture.py" args="file">
             <label>30012</label>
-            <visible>[!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,movie)] | String.IsEqual(Container.Content,files)</visible>
+            <visible>!ListItem.IsFolder + !String.IsEqual(Container.PluginName,plugin.program.shortlist)</visible>
+        </item>
+        <item library="capture.py" args="folder">
+            <label>30014</label>
+            <visible>ListItem.IsFolder + !String.IsEqual(Container.PluginName,plugin.program.shortlist)</visible>
         </item>
       </menu>
-    </extension>
+  </extension>
 </addon>

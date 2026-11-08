@@ -32,6 +32,11 @@ __addon__       = xbmcaddon.Addon(id='plugin.program.shortlist')
 # if __name__ == '__main__':
 def main():
 
+    # Read info about the focused item BEFORE any dialog is shown, otherwise
+    # the InfoLabels may refer to a different item than sys.listitem.
+    is_folder = xbmc.getCondVisibility('ListItem.IsFolder')
+    path = sys.listitem.getPath() or xbmc.getInfoLabel('ListItem.FilenameAndPath')
+
     lst = listDatabases()
     # xbmc.log( "; ".join(lst), xbmc.LOGNOTICE);
 
@@ -46,7 +51,8 @@ def main():
         videoInfoTag = sys.listitem.getVideoInfoTag()
 
         item = ShortlistItem()
-        item.filename = xbmc.getInfoLabel('ListItem.FilenameAndPath')
+        item.filename = path
+        item.isfolder = is_folder
         # item.filename = sys.listitem.getfilename()
         item.title = sys.listitem.getLabel()
         item.duration = sys.listitem.getProperty('duration')

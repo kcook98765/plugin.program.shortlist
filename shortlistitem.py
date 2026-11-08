@@ -17,3 +17,4 @@ class ShortlistItem:
     landscape = ""
     icon = "" 
     
+    isfolder = False

@@ -28,7 +28,7 @@
       <menu id="kodi.core.main">
         <item library="capture.py">
             <label>30012</label>
-            <visible>[!String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,movie)] | String.IsEqual(Container.Content,files)</visible>
+            <visible>!String.StartsWith(Container.FolderPath,plugin://plugin.program.shortlist)</visible>
         </item>
       </menu>
     </extension>

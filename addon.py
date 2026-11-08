@@ -1,5 +1,7 @@
 import sys
 
+import json
+import xbmc
 import xbmcvfs
 import urllib.request, urllib.parse, urllib.error
 import urllib.parse
@@ -33,6 +35,23 @@ databaseName = args.get( 'databaseName' )
 def build_url(query):
     return base_url + '?' + urllib.parse.urlencode(query)
 
+def play_pvr_channel(channelName):
+    # pvr:// paths can't be played as generic items, open the channel by id
+    for group in ('alltv', 'allradio'):
+        req = {'jsonrpc': '2.0', 'id': 1, 'method': 'PVR.GetChannels',
+               'params': {'channelgroupid': group}}
+        res = json.loads(xbmc.executeJSONRPC(json.dumps(req)))
+        for ch in res.get('result', {}).get('channels', []):
+            if ch['label'] == channelName:
+                req = {'jsonrpc': '2.0', 'id': 1, 'method': 'Player.Open',
+                       'params': {'item': {'channelid': ch['channelid']}}}
+                xbmc.executeJSONRPC(json.dumps(req))
+                return True
+    xbmc.log("SHORTLIST: PVR channel not found: " + channelName, level=xbmc.LOGWARNING)
+    return False
+
+refresh = True
+
 if action is not None:
     # Process action
     filename = args.get( 'filename' )
@@ -45,7 +64,13 @@ if action is not None:
         name = ""
         database = None
 
-    if action[0] == 'delete':
+    if action[0] == 'playPvr':
+        refresh = False
+        channel = args.get( 'channel' )
+        if channel is not None:
+            play_pvr_channel( channel[0] )
+
+    elif action[0] == 'delete':
         # Delets specified item
         if filename is not None:
             deleteItem( database, filename[0] )
@@ -130,7 +155,8 @@ if action is not None:
         saveDatabaseByName( database, name )
 
     # Refresh the file list
-    xbmc.executebuiltin("Container.Refresh")
+    if refresh:
+        xbmc.executebuiltin("Container.Refresh")
 else:
     # Show lists
     if dbName is not None:
@@ -204,7 +230,15 @@ else:
             li.addContextMenuItems( commands )
 
             # Add listitem to directory
-            xbmcplugin.addDirectoryItem(handle=addon_handle, url=filename, listitem=li)
+            is_folder = getattr(item, 'isfolder', False)
+            url = filename
+            if filename.startswith('pvr://'):
+                # Run as plain script, which opens the channel via JSON-RPC
+                url = build_url( {'action': 'playPvr', 'channel': item.title} )
+            elif not is_folder:
+                # Needed so Kodi gives the plugin a valid handle for setResolvedUrl()
+                li.setProperty('IsPlayable', 'true')
+            xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=is_folder)
             count = count + 1
         xbmcplugin.endOfDirectory(addon_handle)
 
